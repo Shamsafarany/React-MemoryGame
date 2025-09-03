@@ -14,22 +14,35 @@ function Game(){
         }
     }
 
+    function callAPI(){
+        fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(e => console.log(e));
+    }
+    callAPI();
+
 
     return (
       <div className="gameContainer">
-        <h1>Welcome to Memory Game!</h1>
-        <h3>DO NOT choose the same card or you lose!</h3>
-        <div className="scoreContainer">
-          <p>Current Score: {currentScore}</p>
-          <p>Best Score: {best}</p>
+        <div className="header">
+          <div className="titleContainer">
+            <h1>Welcome to Memory Game!</h1>
+            <h3>DO NOT choose the same card or you lose!</h3>
+          </div>
+          <div className="scoreContainer">
+            <p>Current Score: {currentScore}</p>
+            <p>Best Score: {best}</p>
+          </div>
         </div>
+
         <hr />
         <div className="cardContainer">
           <Card img="" title="" />
           <Card img="" title="" />
           <Card img="" title="" />
           <Card img="" title="" />
-          <Card img="" title="" /> 
+          <Card img="" title="" />
           <Card img="" title="" />
           <Card img="" title="" />
           <Card img="" title="" />
