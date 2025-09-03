@@ -5,12 +5,24 @@ function Game(){
     const [currentScore, setCurrentScore] = useState(0);
     const [best, setBest] = useState(0);
     const [cards, setCards] = useState([]);
+    let requests = [];
 
      useEffect(() => {
-       fetch("https://pokeapi.co/api/v2/pokemon/")
-         .then((response) => response.json())
-         .then((data) => console.log(data))
-         .catch((e) => console.log(e));
+      
+      const randomIDs = [];
+      while(randomIDs.length < 15){
+        const id = Math.floor(Math.random() * 151) + 1;
+        if(!randomIDs.includes(id)) {
+          randomIDs.push(id);
+        }
+      }
+      requests = randomIDs.map((id) =>{
+         fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+           .then((response) => response.json())
+           .then((data) => console.log(data))
+           .then(data => setCards([...cards, data]))
+           .catch((e) => console.log(e));
+      })      
      }, []);
 
     function handleIncrementCurrent(){
