@@ -4,6 +4,8 @@ function Game() {
   const [currentScore, setCurrentScore] = useState(0);
   const [best, setBest] = useState(0);
   const [cards, setCards] = useState([]);
+  const [clickedCards, setClickedCards] = useState([]);
+
   let requests = [];
 
   useEffect(() => {
@@ -19,27 +21,35 @@ function Game() {
         .then((response) => response.json())
         .catch((e) => console.log(e));
     });
-     Promise.all(requests)
-       .then((data) => {
-         setCards(data); // store all fetched Pokémon at once
-       })
-       .catch((err) => console.log(err));
-   
+    Promise.all(requests)
+      .then((data) => {
+        setCards(data); // store all fetched Pokémon at once
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   cards.forEach((card) => {
     console.log(card);
-  })
+  });
 
-  function handleIncrementCurrent() {
-    setCurrentScore((currentScore) => currentScore + 1);
-  }
-  function handleChangeBest() {
-    if (best < currentScore) {
-      setBest(currentScore);
+  function handleClickedCard(id) {
+    if (clickedCards.includes(id)) {
+      alert("You lost");
+      setCurrentScore(0);
+      setClickedCards([]);
+    } else {
+      setCurrentScore((prevScore) => {
+        const newScore = prevScore + 1;
+
+        // Update best using the new score
+        setBest((prevBest) => Math.max(prevBest, newScore));
+
+        return newScore;
+      });
+
+      setClickedCards((prev) => [...prev, id]);
     }
   }
-
   return (
     <div className="gameContainer">
       <div className="header">
@@ -56,11 +66,19 @@ function Game() {
           </p>
         </div>
       </div>
-
       <hr />
       <div className="cardContainer">
-        {cards.map((card, index) => {
-          return <Card img={card.sprites.front_default} title={card.name} key={index}/>
+        {cards.map((card) => {
+          return (
+            <Card
+              key={card.id}
+              img={card.sprites.front_default}
+              title={card.name}
+              onClick={() => {
+                handleClickedCard(card.id);
+              }}
+            />
+          );
         })}
       </div>
     </div>
