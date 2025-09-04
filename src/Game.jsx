@@ -37,6 +37,7 @@ function Game() {
       alert("You lost");
       setCurrentScore(0);
       setClickedCards([]);
+      setCards((prev) => shuffleArray(prev));
     } else {
       setCurrentScore((prevScore) => {
         const newScore = prevScore + 1;
@@ -49,10 +50,14 @@ function Game() {
     }
   }
   function shuffleArray(array){
-    return array.map((value) => ({value, sort: Math.random()}))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({value}) => value);
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const random = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[random]]=[newArray[random], newArray[i]];
+    }
+    return newArray;
   }
+
   return (
     <div className="gameContainer">
       <div className="header">
