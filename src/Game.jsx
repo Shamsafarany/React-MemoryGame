@@ -60,7 +60,7 @@ function Game() {
       <hr />
       <div className="cardContainer">
         {cards.map((card, index) => {
-          return <Card img={card.sprites.front_default} title={card.name}/>
+          return <Card img={card.sprites.front_default} title={card.name} key={index}/>
         })}
       </div>
     </div>

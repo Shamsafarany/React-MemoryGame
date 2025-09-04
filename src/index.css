@@ -2,7 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  background: linear-gradient(45deg, rgb(70, 4, 70), rgb(216, 11, 11));
+  background: linear-gradient(135deg, rgb(70, 4, 70), rgb(216, 11, 11));
   color: rgba(245, 245, 245, 0.76);
   color-scheme: light dark;
   font-synthesis: none;
@@ -12,14 +12,13 @@
 }
 body{
   margin: 0; 
-  height: 100vh;
 }
 .header{
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   padding: 20px;
-  min-width: 600px;
+  gap: 50px;
 }
 h1, h3{
   margin: 20px;
@@ -34,8 +33,9 @@ h1, h3{
 }
 .cardContainer{
   display: grid;
-  padding: 30px;
-  width: 90%;
+  padding: 40px;
+  width: auto;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 25px;
+  margin: 0 auto;
 }
