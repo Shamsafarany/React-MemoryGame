@@ -40,15 +40,18 @@ function Game() {
     } else {
       setCurrentScore((prevScore) => {
         const newScore = prevScore + 1;
-
-        // Update best using the new score
         setBest((prevBest) => Math.max(prevBest, newScore));
-
         return newScore;
       });
 
       setClickedCards((prev) => [...prev, id]);
+      setCards((prev) => shuffleArray(prev));
     }
+  }
+  function shuffleArray(array){
+    return array.map((value) => ({value, sort: Math.random()}))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({value}) => value);
   }
   return (
     <div className="gameContainer">
