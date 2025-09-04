@@ -16,8 +16,10 @@ body{
 }
 .header{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  padding: 20px;
+  min-width: 600px;
 }
 h1, h3{
   margin: 20px;
@@ -25,7 +27,7 @@ h1, h3{
 .scoreContainer{
   margin: 20px;
   font-size: 1.5rem;
-  width: 200px;
+  width: 250px;
   padding: 10px;
   border-radius: 20px;
   box-shadow: 0 0 10px whitesmoke;
